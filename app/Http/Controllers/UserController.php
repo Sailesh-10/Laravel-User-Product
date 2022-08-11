@@ -49,7 +49,7 @@ class UserController extends Controller
 
                     return redirect()->route('admin.dash');
                 } else {
-                    return redirect()->route('user.register');
+                    return redirect()->route('user.home');
                 }
             } else {
                 return view('users.login', [
