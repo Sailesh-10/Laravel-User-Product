@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Users;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -96,10 +95,12 @@ class UserController extends Controller
 
         return view('users.login');
     }
-
     public function AdminDash()
     {
         $products = Product::all();
-        return view('Admin.Admin_dashboard', compact('products'));
+        $userId = Session::get('user_id');
+
+        $user = User::find($userId);
+        return view('Admin.Admin_dashboard', compact('products'), ['user' => $user]);
     }
 }

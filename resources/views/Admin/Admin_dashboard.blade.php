@@ -325,7 +325,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$user->first_name}}</span>
                                 <img class="img-profile rounded-circle" src="/template/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -365,7 +365,8 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6><a class="m-0 font-weight-bold btn btn-primary text-white" href="#">Add
+                            <h6><a class="m-0 font-weight-bold btn btn-primary text-white" href="
+                                    {{route('product.add')}}">Add
                                     Product</a>
                             </h6>
                         </div>
@@ -380,7 +381,9 @@
                                             <th>Weight</th>
                                             <th>Stock</th>
                                             <th>type</th>
-                                            <th class="text-center">Actions</th>
+                                            <th class="text-center">Edit</th>
+                                            <th class="text-center">Delete</th>
+
 
                                         </tr>
                                     </thead>
@@ -394,10 +397,20 @@
                                             <td>{{$product->stock}}</td>
                                             <td>{{$product->type}}</td>
                                             <td class="text-center">
-                                                <span><a class="btn btn-primary text-white mr-2"
-                                                        href="#">Update</a></span>
-                                                <span><a class="btn btn-danger text-white ml-2"
-                                                        href="#">Delete</a></span>
+                                                <a class="btn btn-primary text-white mr-0 mb-0"
+                                                    href="{{route('product.edit', $product->id)}}">Update</a>
+                                            </td>
+                                            <td>
+                                                <form action="{{route('product.delete', $product->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button class="btn btn-danger text-white ml-2" type="
+                                                        submit">Delete</button>
+                                                    </a>
+                                                </form>
+                                                </colspan>
+
                                             </td>
 
                                         </tr>
