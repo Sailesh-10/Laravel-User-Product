@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -13,9 +14,12 @@ class ProductController extends Controller
 {
     public function add()
     {
-        return view('products.add');
+        $userId = Session::get('user_id');
+
+        $user = User::find($userId);
+        return view('products.add', ['user' => $user]);
     }
-    public function StoreProduct(Request $request)
+    public function store(Request $request)
     {
 
         $validate = $request->validate([
@@ -25,6 +29,7 @@ class ProductController extends Controller
             'weight' => 'required',
             'stock' => 'required',
             'type' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
         $product = new Product();
@@ -34,6 +39,10 @@ class ProductController extends Controller
         $product->weight = ($request->input('weight'));
         $product->stock = $request->input('stock');
         $product->type = $request->input('type');
+        $image = $request->file('image');
+        $imageName = date('YmdHi') . $image->getClientOriginalName();
+        $image->move(public_path('public/template/img'), $imageName);
+        $product->image = $imageName;
         $product->save();
 
 
@@ -44,7 +53,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('products.edit', compact('product'));
+        $userId = Session::get('user_id');
+
+        $user = User::find($userId);
+        return view('products.edit', compact('product'), ['user' => $user]);
     }
 
 
@@ -59,6 +71,7 @@ class ProductController extends Controller
             'weight' => 'required',
             'stock' => 'required',
             'type' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
         $product = Product::find($id);
 
@@ -68,6 +81,10 @@ class ProductController extends Controller
         $product->weight = $request->weight;
         $product->stock = $request->stock;
         $product->type = $request->type;
+        $image = $request->file('image');
+        $imageName = date('YmdHi') . $image->getClientOriginalName();
+        $image->move(public_path('public/template/img'), $imageName);
+        $product->image = $imageName;
 
         $product->save();
 

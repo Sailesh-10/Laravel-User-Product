@@ -46,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{route('admin.dash')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -375,6 +375,7 @@
                                 <table class="table  " id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="bg-primary text-white">
+                                            <th>Image</th>
                                             <th>Name</th>
                                             <th>Description</th>
                                             <th>Price</th>
@@ -390,12 +391,15 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                         <tr>
+                                            <td><img class="img-profile rounded-circle"
+                                                    src="{{ url('public/template/img/'.$product->image) }}"></td>
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->weight}}</td>
                                             <td>{{$product->stock}}</td>
                                             <td>{{$product->type}}</td>
+
                                             <td class="text-center">
                                                 <a class="btn btn-primary text-white mr-0 mb-0"
                                                     href="{{route('product.edit', $product->id)}}">Update</a>
