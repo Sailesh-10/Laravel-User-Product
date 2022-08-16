@@ -359,6 +359,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-center text-gray-800">Product Inventory</h1>
 
@@ -370,130 +371,122 @@
                                     Product</a>
                             </h6>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table  " id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr class="bg-primary text-white">
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Price</th>
-                                            <th>Weight</th>
-                                            <th>Stock</th>
-                                            <th>type</th>
-                                            <th class="text-center">Edit</th>
-                                            <th class="text-center">Delete</th>
 
+                        <div class="row">
+                            <div class="col-3">
+                            </div>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($products as $product)
-                                        <tr>
-                                            <td>
-                                                <div class="card-body">
+                            <div class="col-6">
+                                <div class="card o-hidden border-0 shadow-lg my-5">
+                                    <div class="card-body p-0">
+                                        <!-- Nested Row within Card Body -->
 
-                                                    <img class=" img-fluid" alt="avatar"
-                                                        src=" {{ url('public/template/img/'.$product->image) }}"
+                                        <div class="p-5 text-center">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">UPDATE PICTURE!</h1>
+                                            </div>
+                                            <form action="{{route('picture.update', $product->id)}}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @method('PUT')
+                                                @csrf
+
+                                                <div><img class="img-profile text-center"
+                                                        src="{{ url('public/template/img/'.$product->image) }} "
                                                         style="width: 100px;">
                                                 </div>
-                                            </td>
-                                            <td>{{$product->name}}</td>
-                                            <td>{{$product->description}}</td>
-                                            <td>{{$product->price}}</td>
-                                            <td>{{$product->weight}}</td>
-                                            <td>{{$product->stock}}</td>
-                                            <td>{{$product->type}}</td>
+                                                <div class="row">
+                                                    <div class="col-3">
 
-                                            <td class="text-center">
-                                                <a class="btn btn-primary text-white mr-0 mb-0"
-                                                    href="{{route('product.edit', $product->id)}}">Update</a>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('product.delete', $product->id)}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
+                                                    </div>
+                                                    <div class="col-6"> <input type="file"
+                                                            class="form-control form-control-user" id="image"
+                                                            name="image">
+                                                    </div>
+                                                </div>
+                                                @if ($errors->has('image'))
+                                                <span class="text-danger">{{ $errors->first('image') }}</span>
+                                                @endif
 
-                                                    <button class="btn btn-danger text-white ml-2" type="
-                                                        submit">Delete</button>
-                                                    </a>
-                                                </form>
-                                                </colspan>
+                                                <div>
+                                                    <button type="submit"
+                                                        class="btn btn-success btn-facebook mt-3">Update
+                                                        Picture</button>
+                                                </div>
+                                            </form>
 
-                                            </td>
 
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-3">
                             </div>
                         </div>
+
                     </div>
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wgit rapper -->
 
-    </div>
-    <!-- End of Page Wgit rapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{url('/user/logout') }}">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="{{url('/user/logout') }}">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src=" /template/vendor/jquery/jquery.min.js"></script>
-    <script src="/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src=" /template/vendor/jquery/jquery.min.js"></script>
+        <script src="/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/template/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="/template/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/template/js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="/template/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/template/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="/template/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/template/js/demo/datatables-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="/template/js/demo/datatables-demo.js"></script>
 
 </body>
 

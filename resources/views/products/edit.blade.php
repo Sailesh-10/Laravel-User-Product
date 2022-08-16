@@ -455,16 +455,14 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                                        <div><img class="img-profile rounded-circle"
-                                                                src="{{ url('public/template/img/'.$product->image) }}">
+                                                        <div><img class="img-profile"
+                                                                src="{{ url('public/template/img/'.$product->image) }} "
+                                                                style="width: 100px;">
                                                         </div>
-                                                        <label for="image">Change Image</label>
-                                                        <input type="file" class="form-control form-control-user"
-                                                            id="image" name="image">
+                                                        <a class="btn btn-facebook mt-2"
+                                                            href="{{route('picture.edit', $product->id)}}">Change
+                                                            Picture</a>
 
-                                                        @if ($errors->has('image'))
-                                                        <span class="text-danger">{{ $errors->first('image') }}</span>
-                                                        @endif
                                                     </div>
                                                 </div>
 
