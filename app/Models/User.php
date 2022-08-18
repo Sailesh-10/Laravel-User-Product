@@ -10,8 +10,8 @@ class User extends Model
     use HasFactory;
     protected $table = 'users';
 
-    public function favourites()
+    public function products()
     {
-        $this->hasMany(UserFavourite::class);
+        return $this->belongsToMany(Product::class, 'user_favourites');
     }
 }

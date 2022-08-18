@@ -103,4 +103,10 @@ class UserController extends Controller
         $user = User::find($userId);
         return view('Admin.Admin_dashboard', compact('products'), ['user' => $user]);
     }
+    public function UserProduct()
+    {
+        $user = User::find(2);
+        $user_favourites = $user->products;
+        return view('users.fav', compact('user_favourites'));
+    }
 }
