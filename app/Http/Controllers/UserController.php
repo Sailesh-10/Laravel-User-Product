@@ -109,4 +109,10 @@ class UserController extends Controller
         $user_favourites = $user->products;
         return view('users.fav', compact('user_favourites'));
     }
+    public function dash()
+    {
+        $products = Product::all();
+
+        return view('welcome', compact('products'));
+    }
 }

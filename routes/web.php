@@ -16,9 +16,7 @@ use App\Http\Middleware;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [UserController::class, 'dash']);
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
 Route::get('/user/register', [UserController::class, 'register'])->name('user.register');
 Route::post('/user/login', [UserController::class, 'loginCheck'])->name('user.check');
