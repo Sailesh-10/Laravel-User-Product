@@ -20,7 +20,11 @@ class UserController extends Controller
         $userId = Session::get('user_id');
 
         $user = User::find($userId);
-        return view('users.home', ['user' => $user]);
+        $products = Product::all();
+        $topseller = Product::where('type', 'top seller')->get();
+        $featured = Product::where('type', 'featured')->get();
+
+        return view('users.home', ['user' => $user], compact('topseller', 'featured', 'products'));
     }
     public function register()
     {
@@ -103,16 +107,19 @@ class UserController extends Controller
         $user = User::find($userId);
         return view('Admin.Admin_dashboard', compact('products'), ['user' => $user]);
     }
-    public function UserProduct()
+    public function UserProduct($id)
     {
-        $user = User::find(2);
+        $user = User::find($id);
         $user_favourites = $user->products;
-        return view('users.fav', compact('user_favourites'));
+        return view('users.fav', ['user' => $user], compact('user_favourites'));
     }
     public function dash()
+
     {
         $products = Product::all();
+        $topseller = Product::where('type', 'top seller')->get();
+        $featured = Product::where('type', 'featured')->get();
 
-        return view('welcome', compact('products'));
+        return view('welcome', compact('topseller', 'featured', 'products'));
     }
 }

@@ -10,8 +10,36 @@
 
 </head>
 
-<body>
 
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Extratech</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('welcome')}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('user.login')}}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('user.register')}}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
     <section class="section-carousel">
         <div class="container">
             <div class="row">
@@ -47,6 +75,9 @@
             </div>
         </div>
     </section>
+
+
+
     <section class="section-products">
 
         <div class="container">
@@ -54,12 +85,53 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
                         <h3>Featured Product</h3>
-                        <h2>Popular Products</h2>
+
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @foreach ($products as $product)
+            <div class="row mb-5">
+                @foreach ($topseller as $product)
+                <!-- Single Product -->
+
+                <div class="col-md-6 col-lg-4 col-xl-3">
+
+                    <div id="product-1" class="single-product">
+
+
+                        <div class="part-1"
+                            style="background: url({{asset('public/template/img/'.$product->image)}})  no-repeat center;">
+
+                            <ul>
+
+                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fas fa-plus"></i></a></li>
+                                <li><a href="#"><i class="fas fa-expand"></i></a></li>
+                            </ul>
+
+                        </div>
+                        <div class="part-2">
+
+                            <h4 class="product-title text-center">{{$product->name}}</h4>
+                            <h4 class="product-price text-center">${{$product->price}}</h4>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="row justify-content-center text-center ">
+                <div class="col-md-8 col-lg-6 ">
+                    <div class="header">
+                        <h3>Top Selling Products</h3>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                @foreach ($featured as $product)
                 <!-- Single Product -->
 
                 <div class="col-md-6 col-lg-4 col-xl-3">

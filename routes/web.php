@@ -16,7 +16,7 @@ use App\Http\Middleware;
 |
 */
 
-Route::get('/', [UserController::class, 'dash']);
+Route::get('/', [UserController::class, 'dash'])->name('welcome');
 Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
 Route::get('/user/register', [UserController::class, 'register'])->name('user.register');
 Route::post('/user/login', [UserController::class, 'loginCheck'])->name('user.check');
@@ -32,4 +32,4 @@ Route::put('/product/{id}/update', [ProductController::class, 'update'])->name('
 Route::delete('/product/{id}/update', [ProductController::class, 'delete'])->name('product.delete');
 Route::get('/picture/{id}/edit', [ProductController::class, 'ChangePicture'])->name('picture.edit');
 Route::put('/picture/{id}/update', [ProductController::class, 'UpdatePicture'])->name('picture.update');
-Route::get('/user/fav', [UserController::class, 'UserProduct'])->name('user.fav');
+Route::get('/user/{id}/fav', [UserController::class, 'UserProduct'])->name('user.fav');
