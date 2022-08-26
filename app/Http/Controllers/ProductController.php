@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserFavourite;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -115,5 +116,28 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('product.edit', ['id' => $product->id])->with('success', 'Products updated.');
+    }
+    public function StoreFav($id)
+    {
+        $product = Product::find($id);
+        $userId = Session::get('user_id');
+
+        $user = User::find($userId);
+        if (UserFavourite::where('user_id', $userId)->where('product_id', $id)->exists()) {
+            return redirect()->route('user.home')->with('msg', 'Product already in favourite.');
+        } else {
+            $user->products()->attach($product);
+            return redirect()->route('user.fav', ['id' => $user->id])->with('success', 'Product added to favourite.');
+        }
+    }
+    public function RemoveFav($id)
+    {
+        $product = Product::find($id);
+        $userId = Session::get('user_id');
+
+        $user = User::find($userId);
+
+        $user->products()->detach($product);
+        return redirect()->route('user.fav', ['id' => $user->id])->with('msg', 'Product remove from favourite.');
     }
 }

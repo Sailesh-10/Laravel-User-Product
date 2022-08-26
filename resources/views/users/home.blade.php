@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CodePen - Popular Products Section Using HTML , CSS , Bootstrap</title>
+    <title>Home</title>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
     <link rel="stylesheet" href="/template/css/style.css">
@@ -11,10 +11,11 @@
 </head>
 
 
-<header>
+<header class="mb-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Extratech</a>
+
             <a class="navbar-brand"> HI, {{$user->first_name}}</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
@@ -38,9 +39,21 @@
 </header>
 
 <body>
+    @if (\Session::has('msg'))
+    <div class="row mt-5">
+
+        <div class=" alert alert-danger">
+            <ul>
+                <li>{!! \Session::get('msg') !!}</li>
+            </ul>
+        </div>
+    </div>
+    @endif
+
     <section class="section-carousel">
         <div class="container">
             <div class="row">
+
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -102,7 +115,7 @@
                             <ul>
 
                                 <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                <li><a href="{{route('user.favs', $product->id)}}"><i class="fas fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fas fa-plus"></i></a></li>
                                 <li><a href="#"><i class="fas fa-expand"></i></a></li>
                             </ul>
@@ -135,15 +148,14 @@
                 <div class="col-md-6 col-lg-4 col-xl-3">
 
                     <div id="product-1" class="single-product">
-
-
                         <div class="part-1"
                             style="background: url({{asset('public/template/img/'.$product->image)}})  no-repeat center;">
 
                             <ul>
 
                                 <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                <li><a href="{{route('user.favs', $product->id)}}"><i class="fas fa-heart"></i></a>
+                                </li>
                                 <li><a href="#"><i class="fas fa-plus"></i></a></li>
                                 <li><a href="#"><i class="fas fa-expand"></i></a></li>
                             </ul>
@@ -153,6 +165,7 @@
 
                             <h3 class="product-title text-center">{{$product->name}}</h3>
                             <h3 class="product-price text-center">${{$product->price}}</h3>
+
 
 
 

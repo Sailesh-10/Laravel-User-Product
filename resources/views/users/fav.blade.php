@@ -41,6 +41,26 @@
     <section class="section-products">
 
         <div class="container">
+            @if (\Session::has('success'))
+            <div class="row mt-5">
+
+                <div class=" alert alert-success">
+                    <ul>
+                        <li>{!! \Session::get('success') !!}</li>
+                    </ul>
+                </div>
+            </div>
+            @endif
+            @if (\Session::has('msg'))
+            <div class="row mt-5">
+
+                <div class=" alert alert-danger">
+                    <ul>
+                        <li>{!! \Session::get('msg') !!}</li>
+                    </ul>
+                </div>
+            </div>
+            @endif
             <div class="row justify-content-center text-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
@@ -64,7 +84,8 @@
                             <ul>
 
                                 <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                <li><a href="{{route('remove.fav', $product->id)}}"><i class="fas fa-heart"></i></a>
+                                </li>
                                 <li><a href="#"><i class="fas fa-plus"></i></a></li>
                                 <li><a href="#"><i class="fas fa-expand"></i></a></li>
                             </ul>

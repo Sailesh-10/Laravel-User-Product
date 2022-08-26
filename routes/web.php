@@ -33,3 +33,5 @@ Route::delete('/product/{id}/update', [ProductController::class, 'delete'])->nam
 Route::get('/picture/{id}/edit', [ProductController::class, 'ChangePicture'])->name('picture.edit');
 Route::put('/picture/{id}/update', [ProductController::class, 'UpdatePicture'])->name('picture.update');
 Route::get('/user/{id}/fav', [UserController::class, 'UserProduct'])->name('user.fav');
+Route::get('/user/{id}/favs', [ProductController::class, 'StoreFav'])->name('user.favs');
+Route::get('/user/{id}/remove', [ProductController::class, 'RemoveFav'])->name('remove.fav');
